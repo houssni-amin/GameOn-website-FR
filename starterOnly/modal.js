@@ -10,7 +10,6 @@ function editNav() {
 // DOM Elements
 const modalbg = document.querySelector(".bground")
 const modalBtn = document.querySelectorAll(".modal-btn")
-const formData = document.querySelectorAll(".formData")
 const btnCloseModal = document.querySelector(".close")
 const inputFirst = document.querySelector("#first")
 const errorFirst = document.querySelector(".errorFirst")
@@ -40,44 +39,52 @@ btnCloseModal.addEventListener("click", () => {
   modalbg.style.display = "none"
 })
 
-function validate() {
-  let isValid = true
-
+function validateFirst() {
   if (inputFirst.value.length < 2) {
-    isValid = false
     errorFirst.style.display = "block"
-  } else {
-    errorFirst.style.display = "none"
+    return false
   }
+  errorFirst.style.display = "none"
+  return true
+}
 
+function validateLast() {
   if (inputLast.value.length < 2) {
-    isValid = false
     errorLast.style.display = "block"
-  } else {
-    errorLast.style.display = "none"
+    return false
   }
+  errorLast.style.display = "none"
+  return true
+}
 
+function validateEmail() {
   if (!emailRegex.test(inputEmail.value)) {
-    isValid = false
     errorEmail.style.display = "block"
-  } else {
-    errorEmail.style.display = "none"
+    return false
   }
+  errorEmail.style.display = "none"
+  return true
+}
 
+function validateBirthdate() {
   if (inputBirthdate.value === "") {
-    isValid = false
     errorBirthdate.style.display = "block"
-  } else {
-    errorBirthdate.style.display = "none"
+    return false
   }
+  errorBirthdate.style.display = "none"
+  return true
+}
 
+function validateQuantity() {
   if (inputQuantity.value === "") {
-    isValid = false
     errorQuantity.style.display = "block"
-  } else {
-    errorQuantity.style.display = "none"
+    return false
   }
+  errorQuantity.style.display = "none"
+  return true
+}
 
+function validateLocation() {
   let radioChecked = false
   radioLocations.forEach((radio) => {
     if (radio.checked) {
@@ -86,18 +93,39 @@ function validate() {
   })
 
   if (!radioChecked) {
-    isValid = false
     errorLocation.style.display = "block"
-  } else {
-    errorLocation.style.display = "none"
+    return false
   }
+  errorLocation.style.display = "none"
+  return true
+}
 
-  if (termsChecked.checked === false) {
-    isValid = false
+function validateTerms() {
+  if (!termsChecked.checked) {
     errorTerms.style.display = "block"
-  } else {
-    errorTerms.style.display = "none"
+    return false
   }
+  errorTerms.style.display = "none"
+  return true
+}
+
+function validate() {
+  const isFirstValid = validateFirst()
+  const isLastValid = validateLast()
+  const isEmailValid = validateEmail()
+  const isBirthdateValid = validateBirthdate()
+  const isQuantityValid = validateQuantity()
+  const isLocationValid = validateLocation()
+  const isTermsValid = validateTerms()
+
+  const isValid =
+    isFirstValid &&
+    isLastValid &&
+    isEmailValid &&
+    isBirthdateValid &&
+    isQuantityValid &&
+    isLocationValid &&
+    isTermsValid
 
   if (isValid) {
     alert("Merci ! Votre réservation a été reçue.")
