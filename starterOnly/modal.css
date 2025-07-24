@@ -78,9 +78,6 @@ img {
 }
 
 @media screen and (max-width: 768px) {
-  .topnav.responsive {
-    position: relative;
-  }
   .topnav.responsive .icon {
     position: absolute;
     right: 0;
@@ -100,7 +97,6 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
   }
 }
 
@@ -578,13 +574,30 @@ footer {
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 0%;
+    top: 10%;
     left: 0%;
     transform: translate(-0%, -0%);
     padding: 30px;
     height: 100vh;
     border-radius: 0px;
     width: 100%;
+  }
+
+  .topnav {
+    position: fixed;
+    top: 0%;
+    left: 0;
+    margin: 0%;
+    padding: 3%;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+  }
+  main {
+    margin-top: 100px;
+  }
+  .content {
+    margin: 20% auto;
   }
 }
 

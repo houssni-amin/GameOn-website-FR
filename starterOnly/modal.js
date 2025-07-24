@@ -29,6 +29,14 @@ const errorTerms = document.querySelector(".errorTerms")
 const confirmationModal = document.querySelector("#confirmationModal")
 const closeConfirmation = document.querySelector(".close-confirmation")
 const form = document.querySelector("form[name=reserve]")
+const navLinks = document.querySelectorAll(".topnav a")
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", function () {
+    navLinks.forEach((l) => l.classList.remove("active"))
+    this.classList.add("active")
+  })
+})
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal))
