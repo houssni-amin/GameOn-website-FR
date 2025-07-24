@@ -26,6 +26,9 @@ const radioLocations = document.querySelectorAll("input[name=location]")
 const errorLocation = document.querySelector(".errorLocation")
 const termsChecked = document.querySelector("#checkbox1")
 const errorTerms = document.querySelector(".errorTerms")
+const confirmationModal = document.querySelector("#confirmationModal")
+const closeConfirmation = document.querySelector(".close-confirmation")
+const form = document.querySelector("form[name=reserve]")
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal))
@@ -37,6 +40,10 @@ function launchModal() {
 
 btnCloseModal.addEventListener("click", () => {
   modalbg.style.display = "none"
+})
+
+closeConfirmation.addEventListener("click", () => {
+  confirmationModal.style.display = "none"
 })
 
 function validateFirst() {
@@ -128,8 +135,11 @@ function validate() {
     isTermsValid
 
   if (isValid) {
-    alert("Merci ! Votre réservation a été reçue.")
+    modalbg.style.display = "none"
+    confirmationModal.style.display = "block"
+    form.reset()
+    return false
   }
 
-  return isValid
+  return false
 }
