@@ -17,14 +17,17 @@
     />
   </head>
 
+  <!-- Script EmailJS pour envoi d'email -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
+    // Initialisation de EmailJS avec la clé publique
     ;(function () {
       emailjs.init({
         publicKey: "zL1dTQ7MjBB1asZei",
       })
     })()
 
+    // Fonction d'envoi des données du formulaire
     window.sendEmail = function (formData) {
       return emailjs.send("service_yo9qqqu", "template_mqvytos", formData)
     }
@@ -65,6 +68,7 @@
         <button class="btn-signup modal-btn">je m'inscris</button>
       </div>
 
+      <!-- Formulaire modal -->
       <div class="bground">
         <div class="content">
           <span class="close"></span>
@@ -76,9 +80,9 @@
               onsubmit="return validate()"
               novalidate
             >
+              <!-- Chaque champ a son label, input, et message d'erreur -->
               <div class="formData">
                 <label for="first">Prénom</label><br />
-
                 <input
                   class="text-control"
                   type="text"
@@ -142,6 +146,8 @@
                   Veuillez entrer un nombre entre 0 et 99.
                 </p>
               </div>
+
+              <!-- Choix du lieu de participation via boutons radio -->
               <p class="text-label">
                 A quel tournoi souhaitez-vous participer cette année ?
               </p>
@@ -154,8 +160,7 @@
                   value="New York"
                 />
                 <label class="checkbox-label" for="location1">
-                  <span class="checkbox-icon"></span>
-                  New York</label
+                  <span class="checkbox-icon"></span>New York</label
                 >
                 <input
                   class="checkbox-input"
@@ -165,8 +170,7 @@
                   value="San Francisco"
                 />
                 <label class="checkbox-label" for="location2">
-                  <span class="checkbox-icon"></span>
-                  San Francisco</label
+                  <span class="checkbox-icon"></span>San Francisco</label
                 >
                 <input
                   class="checkbox-input"
@@ -176,8 +180,7 @@
                   value="Seattle"
                 />
                 <label class="checkbox-label" for="location3">
-                  <span class="checkbox-icon"></span>
-                  Seattle</label
+                  <span class="checkbox-icon"></span>Seattle</label
                 >
                 <input
                   class="checkbox-input"
@@ -187,8 +190,7 @@
                   value="Chicago"
                 />
                 <label class="checkbox-label" for="location4">
-                  <span class="checkbox-icon"></span>
-                  Chicago</label
+                  <span class="checkbox-icon"></span>Chicago</label
                 >
                 <input
                   class="checkbox-input"
@@ -198,8 +200,7 @@
                   value="Boston"
                 />
                 <label class="checkbox-label" for="location5">
-                  <span class="checkbox-icon"></span>
-                  Boston</label
+                  <span class="checkbox-icon"></span>Boston</label
                 >
                 <input
                   class="checkbox-input"
@@ -209,8 +210,7 @@
                   value="Portland"
                 />
                 <label class="checkbox-label" for="location6">
-                  <span class="checkbox-icon"></span>
-                  Portland</label
+                  <span class="checkbox-icon"></span>Portland</label
                 >
                 <p class="errorLocation">
                   Veuillez sélectionner une ville pour participer au tournoi.
@@ -241,6 +241,8 @@
                 </label>
                 <br />
               </div>
+
+              <!-- Bouton de validation final -->
               <input
                 class="btn-submit"
                 type="submit"
@@ -251,6 +253,8 @@
           </div>
         </div>
       </div>
+
+      <!-- Message de confirmation après envoi -->
       <div class="confirmation-modal" id="confirmationModal">
         <div class="confirmation-content">
           <span class="close-confirmation">&times;</span>

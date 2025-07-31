@@ -31,6 +31,7 @@ const closeConfirmation = document.querySelector(".close-confirmation")
 const form = document.querySelector("form[name=reserve]")
 const navLinks = document.querySelectorAll(".topnav a")
 
+// Ajoute le style "active" au lien cliqué et le retire des autres
 navLinks.forEach((link) => {
   link.addEventListener("click", function () {
     navLinks.forEach((l) => l.classList.remove("active"))
@@ -38,22 +39,23 @@ navLinks.forEach((link) => {
   })
 })
 
-// launch modal event
+// Ouvre la modal d'inscription
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal))
-
-// launch modal form
 function launchModal() {
   modalbg.style.display = "block"
 }
 
+// Ferme la modal d'inscription
 btnCloseModal.addEventListener("click", () => {
   modalbg.style.display = "none"
 })
 
+// Ferme la modal de confirmation
 closeConfirmation.addEventListener("click", () => {
   confirmationModal.style.display = "none"
 })
 
+// Vérifie que le prénom a au moins 2 caractères
 function validateFirst() {
   if (inputFirst.value.length < 2) {
     errorFirst.style.display = "block"
@@ -63,6 +65,7 @@ function validateFirst() {
   return true
 }
 
+// Vérifie que le nom a au moins 2 caractères
 function validateLast() {
   if (inputLast.value.length < 2) {
     errorLast.style.display = "block"
@@ -72,6 +75,7 @@ function validateLast() {
   return true
 }
 
+// Vérifie la validité de l'email avec la regex
 function validateEmail() {
   if (!emailRegex.test(inputEmail.value)) {
     errorEmail.style.display = "block"
@@ -81,17 +85,20 @@ function validateEmail() {
   return true
 }
 
+// Vérifie la date de naissance
 function validateBirthdate() {
   const birthdateValue = inputBirthdate.value
   const birthdate = new Date(birthdateValue)
   const today = new Date()
 
+  // Vérifie si la date est vide ou dans le futur
   if (!birthdateValue || birthdate > today) {
     errorBirthdate.textContent = "Veuillez entrer une date de naissance valide."
     errorBirthdate.style.display = "block"
     return false
   }
 
+  // Calcule l'âge exact
   const age = today.getFullYear() - birthdate.getFullYear()
   const hasBirthdayThisYear =
     today.getMonth() > birthdate.getMonth() ||
@@ -100,6 +107,7 @@ function validateBirthdate() {
 
   const realAge = hasBirthdayThisYear ? age : age - 1
 
+  // Vérifie que l'utilisateur a au moins 13 ans
   if (realAge < 13) {
     errorBirthdate.textContent =
       "Vous devez avoir au moins 13 ans pour vous inscrire."
@@ -111,6 +119,7 @@ function validateBirthdate() {
   return true
 }
 
+// Vérifie que le champ quantité n'est pas vide
 function validateQuantity() {
   if (inputQuantity.value === "") {
     errorQuantity.style.display = "block"
@@ -120,6 +129,7 @@ function validateQuantity() {
   return true
 }
 
+// Vérifie qu'un lieu a bien été sélectionné
 function validateLocation() {
   let radioChecked = false
   radioLocations.forEach((radio) => {
@@ -136,6 +146,7 @@ function validateLocation() {
   return true
 }
 
+// Vérifie que les CGU sont cochées
 function validateTerms() {
   if (!termsChecked.checked) {
     errorTerms.style.display = "block"
@@ -145,6 +156,7 @@ function validateTerms() {
   return true
 }
 
+// Fonction globale de validation
 function validate() {
   const isFirstValid = validateFirst()
   const isLastValid = validateLast()
@@ -154,6 +166,7 @@ function validate() {
   const isLocationValid = validateLocation()
   const isTermsValid = validateTerms()
 
+  // Vérifie que tout est valide
   const isValid =
     isFirstValid &&
     isLastValid &&
@@ -164,6 +177,7 @@ function validate() {
     isTermsValid
 
   if (isValid) {
+    // Affiche les valeurs dans la console
     console.log("Prénom :", inputFirst.value)
     console.log("Nom :", inputLast.value)
     console.log("Email :", inputEmail.value)
@@ -178,10 +192,11 @@ function validate() {
     const wantsNotifications = document.querySelector("#checkbox2").checked
     console.log("Souhaite être prévenu :", wantsNotifications)
 
+    // Ferme la modal et affiche celle de confirmation
     modalbg.style.display = "none"
     confirmationModal.style.display = "block"
 
-    // Prépare les données à envoyer
+    // Prépare les données à envoyer par email
     const formData = {
       from_name: inputFirst.value + " " + inputLast.value,
       first_name: inputFirst.value,
@@ -193,7 +208,7 @@ function validate() {
         document.querySelector('input[name="location"]:checked')?.value || "",
     }
 
-    // Envoie avec EmailJS
+    // Envoie l'email avec EmailJS
     window
       .sendEmail(formData)
       .then(() => console.log("✅ Email envoyé avec succès !"))
