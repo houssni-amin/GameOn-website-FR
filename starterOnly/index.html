@@ -16,6 +16,20 @@
       rel="stylesheet"
     />
   </head>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    ;(function () {
+      emailjs.init({
+        publicKey: "zL1dTQ7MjBB1asZei",
+      })
+    })()
+
+    window.sendEmail = function (formData) {
+      return emailjs.send("service_yo9qqqu", "template_mqvytos", formData)
+    }
+  </script>
+
   <body>
     <div class="topnav" id="myTopnav">
       <div class="header-logo">
@@ -240,7 +254,10 @@
       <div class="confirmation-modal" id="confirmationModal">
         <div class="confirmation-content">
           <span class="close-confirmation">&times;</span>
-          <p>Merci pour votre incription !</p>
+          <p>
+            Merci pour votre incription ! <br /><br />
+            📩 Un email de confirmation vous a été envoyé!
+          </p>
         </div>
       </div>
     </main>

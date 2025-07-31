@@ -180,6 +180,25 @@ function validate() {
 
     modalbg.style.display = "none"
     confirmationModal.style.display = "block"
+
+    // Prépare les données à envoyer
+    const formData = {
+      from_name: inputFirst.value + " " + inputLast.value,
+      first_name: inputFirst.value,
+      last_name: inputLast.value,
+      email: inputEmail.value,
+      birthdate: inputBirthdate.value,
+      quantity: inputQuantity.value,
+      location:
+        document.querySelector('input[name="location"]:checked')?.value || "",
+    }
+
+    // Envoie avec EmailJS
+    window
+      .sendEmail(formData)
+      .then(() => console.log("✅ Email envoyé avec succès !"))
+      .catch((error) => console.error("❌ Erreur lors de l'envoi :", error))
+
     form.reset()
     return false
   }
