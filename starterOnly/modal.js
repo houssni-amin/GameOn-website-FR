@@ -82,10 +82,31 @@ function validateEmail() {
 }
 
 function validateBirthdate() {
-  if (inputBirthdate.value === "") {
+  const birthdateValue = inputBirthdate.value
+  const birthdate = new Date(birthdateValue)
+  const today = new Date()
+
+  if (!birthdateValue || birthdate > today) {
+    errorBirthdate.textContent = "Veuillez entrer une date de naissance valide."
     errorBirthdate.style.display = "block"
     return false
   }
+
+  const age = today.getFullYear() - birthdate.getFullYear()
+  const hasBirthdayThisYear =
+    today.getMonth() > birthdate.getMonth() ||
+    (today.getMonth() === birthdate.getMonth() &&
+      today.getDate() >= birthdate.getDate())
+
+  const realAge = hasBirthdayThisYear ? age : age - 1
+
+  if (realAge < 13) {
+    errorBirthdate.textContent =
+      "Vous devez avoir au moins 13 ans pour vous inscrire."
+    errorBirthdate.style.display = "block"
+    return false
+  }
+
   errorBirthdate.style.display = "none"
   return true
 }
