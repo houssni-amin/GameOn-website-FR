@@ -164,6 +164,20 @@ function validate() {
     isTermsValid
 
   if (isValid) {
+    console.log("Prénom :", inputFirst.value)
+    console.log("Nom :", inputLast.value)
+    console.log("Email :", inputEmail.value)
+    console.log("Date de naissance :", inputBirthdate.value)
+    console.log("Quantité :", inputQuantity.value)
+
+    const selectedLocation = Array.from(radioLocations).find((r) => r.checked)
+    console.log("Ville choisie :", selectedLocation.value)
+
+    console.log("Conditions acceptées :", termsChecked.checked)
+
+    const wantsNotifications = document.querySelector("#checkbox2").checked
+    console.log("Souhaite être prévenu :", wantsNotifications)
+
     modalbg.style.display = "none"
     confirmationModal.style.display = "block"
     form.reset()
